@@ -1,0 +1,58 @@
+﻿branches:
+  master:
+    tag: ''
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+    tracks-release-branches: false
+    is-release-branch: false
+    mode: ContinuousDeployment
+  release:
+    regex: releases?[/-]
+    tag: "beta"
+    increment: None
+    prevent-increment-of-merged-branch-version: true
+    is-release-branch: true
+    track-merge-target: false
+    tracks-release-branches: false
+    mode: ContinuousDeployment
+  feature:
+    regex: features?[/-]
+    tag: useBranchName
+    increment: None
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: false
+    tracks-release-branches: false
+    is-release-branch: false
+    mode: ContinuousDeployment
+  develop:
+    tag: "alpha"
+    prevent-increment-of-merged-branch-version: false
+    increment: None  # OR MINOR?
+    track-merge-target: true
+    tracks-release-branches: false
+    is-release-branch: false
+    mode: ContinuousDeployment
+  hotfix:
+    regex: hotfix(es)?[/-]
+    tag: "hotfix"
+    increment: None
+    prevent-increment-of-merged-branch-version: true
+    is-release-branch: true
+    track-merge-target: false
+    tracks-release-branches: false
+    mode: ContinuousDeployment
+  pull-request:
+    regex: (pull|pull\-requests|pr)[/-]
+    increment: Inherit
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: false
+    tracks-release-branches: false
+    is-release-branch: false
+    mode: ContinuousDeployment
+# prevent-increment-of-merged-branch-version: Prevents incrementing after a versioned branch is merged
+# track-merge-target: Look for tagged merge commits directly off the current branch
+# tracks-release-branches: Indicates this branch config represents develop in GitFlow.
+# source-branches: Hint telling GitVersion what types of branches a branch can be created from
+# is-release-branch: Indicates this branch config represents a release branch in GitFlow.
+# increment: The part of the SemVer to increment when GitVersion detects it needs to be increased. Major, Minor, Patch, None, Inherit
+# mode: Continuous Delivery is the default mode. In this mode, GitVersion calculates the next version and will use that until that is released. Sometimes you just want the version to keep changing and deploy continuously. In this case, Continuous Deployment.
